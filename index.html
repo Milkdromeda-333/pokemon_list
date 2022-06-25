@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon List</title>
+</head>
+
+<body>
+    <ul>
+        <!-- To be filled with JavaScript -->
+    </ul>
+    <script>
+        // this code gets a random element in the array and logs it, was too proud of it to just delete
+        //  let xhr = new XMLHttpRequest();
+        // xhr.open("GET", "https://api.vschool.io/pokemon", true);
+        // xhr.send();
+        // xhr.onreadystatechange = function () {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         let jsonData = xhr.responseText;
+        //         let data = JSON.parse(jsonData);
+        //         const num = getRandomNum(data.objects[0].pokemon);
+        //         console.log(data.objects[0].pokemon[num].name);
+        //     }
+        // };const getRandomNum = (arr) => Math.floor(Math.random() * arr.length);
+
+
+        let ul = document.getElementsByTagName("ul")[0];
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.vschool.io/pokemon", true);
+        xhr.send();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let jsonData = xhr.responseText;
+                let data = JSON.parse(jsonData);
+                let pokeList = data.objects[0].pokemon;
+                for (pokemon of pokeList) {
+                    let pokemonItem = document.createElement("li");
+                    pokemonItem.innerHTML = pokemon.name;
+                    ul.appendChild(pokemonItem);
+                }
+            }
+        };
+
+        const getRandomNum = (arr) => Math.floor(Math.random() * arr.length)
+    </script>
+</body>
+
+</html>
